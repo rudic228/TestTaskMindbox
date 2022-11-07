@@ -1,0 +1,23 @@
+create table "Product"(
+"Id" integer primary key,
+"Name" varchar(50) not null
+);
+create table "Category"(
+"Id" integer primary key,
+"Name" varchar(50) not null
+);
+create table "CategoryProduct"(
+"ProductId" integer,
+"CategoryId" integer,
+constraint "ProductRelation" foreign key("ProductId")
+references "Product"("Id")
+on delete cascade,
+constraint "CategoryRelation" foreign key("CategoryId")
+references "Category"("Id")
+on delete cascade
+);
+
+select C."Name" as Category, P."Name" as Product
+from "Product" P
+left join "CategoryProduct" CP on CP."ProductId" = P."Id"
+left join "Category" C on CP."CategoryId" = C."Id"
